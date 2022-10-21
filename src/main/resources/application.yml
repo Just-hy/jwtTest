@@ -12,14 +12,16 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-  mvc:
-    static-path-pattern: /static/**
+#  mvc:
+#    static-path-pattern: /static/**
+#    path match:
+#      matching-strategy: ant_path_matcher
 mybatis-plus:
   type-aliases-package: com.example.jwttest.pojo
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-pagehelper:
+page helper:
   helperDialect: mysql
   reasonable: true
 server:
