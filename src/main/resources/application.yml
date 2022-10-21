@@ -12,6 +12,8 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    static-path-pattern: /static/**
 mybatis-plus:
   type-aliases-package: com.example.jwttest.pojo
   configuration:
