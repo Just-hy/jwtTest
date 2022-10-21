@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <script src="../static/js/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function (){
+            $("#btnlogin").click(function (){
+                $.ajax({
+                    type:"post",
+                    // 访问后端接口 http://localhost:8080/dologin
+                    url:"dologin",
+                    contentType:"application/json",
+                    data:JSON.stringify({
+                        "username":$("#username").val(),
+                        "password":$("#password").val()
+                    }),
+                    dataType:"json",
+                    success:function (result){
+                        // alert(result.data);
+                        setCookieValue("token",result.data)
+                    }
+                });
+            });
+        });
+        //cookie只能存放键值对
+        var operator = "=";
+        //window.document.cookie可以拿到cookie所有的key=value;形式的字符串。所以从cookie拿值，遍历cookie的所有key，直到key等于keyStr，
+        //就可以拿到对应的值，例如我们要拿名为token的key，调用方法getCookieValue(token)就可以拿到key为token的值(value)
+        function getCookieValue(keyStr){
+            var value = null;
+            var s = window.document.cookie;
+            var arr = s.split("; ");
+            for(var i=0; i<arr.length; i++){
+                var str = arr[i];
+                var k = str.split(operator)[0];
+                var v = str.split(operator)[1];
+                if(k == keyStr){
+                    value = v;
+                    break;
+                }
+            }
+            return value;
+        }
+        //往cookie中设置格式：document.cookie = key=value，例如token=fohweoif2n334023noi2r
+        function setCookieValue(key,value) {
+            alert(value)
+            document.cookie = key + operator + value;
+        }
+
+    </script>
+</head>
+<body>
+<form id="frmlogin" >
+    用户名：<input id="username" type="text"/><br/>
+    密码：<input id="password" type="password"/><br/>
+    <input type="button" value="登录" id="btnlogin"/>
+</form>
+</body>
+</html>
